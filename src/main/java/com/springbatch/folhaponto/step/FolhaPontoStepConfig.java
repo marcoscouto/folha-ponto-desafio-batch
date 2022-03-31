@@ -29,7 +29,7 @@ public class FolhaPontoStepConfig {
 			JdbcCursorItemReader<Funcionario> funcionarioReaderJdbc,
 			ItemProcessor<Funcionario, FolhaPonto> folhaPontoProcessor,
 			ClassifierCompositeItemWriter<FolhaPonto> folhaPontoWriter,
-			@Qualifier("folhaPontoFlatFileWriter") FlatFileItemWriter<FolhaPonto> folhaPontoWriterFlatFile,
+			@Qualifier("folhaPontoFlatFileWriter") FlatFileItemWriter<FolhaPonto> folhaPontoFlatFileWriter,
 			@Qualifier("funcionarioSemPontoFlatFileWriter") FlatFileItemWriter<FolhaPonto> funcionarioSemPontoFlatFileWriter) {
 		return stepBuilderFactory
 				.get("folhaPontoStep")
@@ -37,7 +37,7 @@ public class FolhaPontoStepConfig {
 				.reader(new FuncionarioReader(funcionarioReaderJdbc))
 				.processor(folhaPontoProcessor)
 				.writer(folhaPontoWriter)
-				.stream(folhaPontoWriterFlatFile)
+				.stream(folhaPontoFlatFileWriter)
 				.stream(funcionarioSemPontoFlatFileWriter)
 				.build();
 	}
